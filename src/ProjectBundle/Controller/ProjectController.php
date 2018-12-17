@@ -2,10 +2,13 @@
 
 namespace ProjectBundle\Controller;
 
+use CoreBundle\Entity\User;
 use ProjectBundle\Entity\Project;
 use ProjectBundle\Form\ProjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * Account controller.
@@ -23,11 +26,11 @@ class ProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $projects = $em->getRepository('ProjectBundle:Project')->createQueryBuilder('p')
-            ->where('p.owner = :user')
+            ->where('(p.owner = :user OR  :user MEMBER OF p.participants)')
             ->andWhere('p.closed = :false')
             ->setParameter('false', false)
             ->setParameter('user', $this->getUser())
-        ->getQuery()->getResult();
+            ->getQuery()->getResult();
 
         return $this->render('@Project/Project/index.html.twig', array(
             'projects' => $projects,
@@ -75,12 +78,28 @@ class ProjectController extends Controller
 
     public function ficheAction(Project $project)
     {
-        return $this->render('@Project/Project/fiche.html.twig',[
-            'project'=>$project,
-            'types'=>[
-                \ProjectBundle\Entity\Requete::TYPE_BUG=>'Bug',
-                \ProjectBundle\Entity\Requete::TYPE_NEW=>'Nouvelle demande',
-                \ProjectBundle\Entity\Requete::TYPE_IDEA=>'Idée',
+        $project->addParticipant($project->getOwner());
+
+        $usersObj = $this->getDoctrine()->getRepository('CoreBundle:User')
+            ->createQueryBuilder('u')
+            ->where('u.id NOT IN (:participants) ')
+            ->setParameter('participants', $project->getParticipants())
+            ->orderBy('u.username', 'ASC')
+            ->groupBy('u.id')
+            ->getQuery()->getResult();
+        $users = [];
+        /** @var User $u */
+        foreach ($usersObj AS $u) {
+            $users [$u->getId()] = $u->getFullname();
+        }
+
+        return $this->render('@Project/Project/fiche.html.twig', [
+            'project' => $project,
+            'users' => $users,
+            'types' => [
+                \ProjectBundle\Entity\Requete::TYPE_BUG => 'Bug',
+                \ProjectBundle\Entity\Requete::TYPE_NEW => 'Nouvelle demande',
+                \ProjectBundle\Entity\Requete::TYPE_IDEA => 'Idée',
             ],
         ]);
     }
@@ -99,4 +118,16 @@ class ProjectController extends Controller
         return $this->redirectToRoute('project_index');
     }
 
+
+    public function addUserAction(Request $request, Project $project)
+    {
+        $user = $this->getDoctrine()->getRepository('CoreBundle:User')->find($request->get('user'));
+        if ($user != null) {
+            $project->addParticipant($user);
+            $this->getDoctrine()->getManager()->flush();
+            return new JsonResponse(['success' => true]);
+        }
+        return new JsonResponse(['success' => false]);
+
+    }
 }

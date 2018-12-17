@@ -4,12 +4,16 @@ project_index:
 project_new:
     path:     /new
     defaults: { _controller: "ProjectBundle:Project:new" }
+project_user:
+    path:     /add-user/{id}
+    defaults: { _controller: "ProjectBundle:Project:addUser" }
+
 project_edit:
-    path:     /{id}/edit
+    path:     /edit/{id}
     defaults: { _controller: "ProjectBundle:Project:edit" }
 project_delete:
-    path:     /{id}/delete
+    path:     /delete/{id}
     defaults: { _controller: "ProjectBundle:Project:delete" }
 project_fiche:
-    path:     /{id}
+    path:     /index/{id}
     defaults: { _controller: "ProjectBundle:Project:fiche" }

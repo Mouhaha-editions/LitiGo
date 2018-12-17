@@ -1,4 +1,4 @@
 services:
-#    project:
-#        class: ProjectBundle\Service\AccountService
-#        arguments: ["@doctrine.orm.entity_manager"]
+    project:
+        class: ProjectBundle\Service\ProjectService
+        arguments: ["@doctrine.orm.entity_manager",'@security.helper']

@@ -8,14 +8,21 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h3 class="title"> {{ project.label }}
-                            <a href="{{ url('project_edit',{id: project.id}) }}" class="btn btn-info btn-sm rounded-s">
-                                modifier le projet </a>
                             <a href="{{ url('request_new',{id:project.id}) }}"
                                class="btn btn-primary btn-sm rounded-s">
                                 nouvelle demande </a>
+                            {% if service_project.isOwner(project) %}
+                            <a href="{{ url('project_edit',{id: project.id}) }}" class="btn btn-info btn-sm rounded-s">
+                                modifier le projet </a>
+
                             <a href="{{ url('project_edit',{id: project.id}) }}"
                                class="btn btn-danger confirm btn-sm rounded-s">
-                                cloturer </a>
+                               <i class="fa fa-close"></i> cloturer </a>
+
+                            <a href="{{ url('project_edit',{id: project.id}) }}"
+                               class="btn btn-primary btn-sm rounded-s add-participant">
+                                <i class="fa fa-user"></i> Ajouter participant </a>
+                            {% endif %}
                         </h3>
                         <p class="title-description"> {{ project.description }} </p>
                     </div>
@@ -212,4 +219,48 @@
             </ul>
         </nav>
     </article>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+    var users = {{ users|json_encode|raw }};
+    $(function(){
+
+       $(".add-participant").on('click', function(){
+            swal({
+                title: 'Ajouter un participant',
+                input: 'select',
+                inputOptions: users,
+                inputPlaceholder: 'Choisir un utilisateur',
+
+            }).then((result)=>{
+                if(result.value !== undefined && result.value.trim() !== ''){
+                    $.ajax({
+                        url: "{{ url('project_user',{id:project.id}) }}",
+                        data: {
+                            user : result.value
+                        },
+                        success:function(data){
+                            if(data.success) {
+                                swal({
+                                    title: 'Participant ajouté',
+                                    type: 'success',
+                                    text: 'Le participant à bien été ajouté'
+                                });
+                            }else{
+                                swal({
+                                    title: 'Erreur',
+                                    type: 'danger',
+                                    text: "Impossible d'ajouter le participant"
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+            return false;
+
+       }) ;
+    });
+</script>
 {% endblock %}
