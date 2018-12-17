@@ -1,0 +1,7 @@
+project:
+    resource: "@ProjectBundle/Resources/config/routing/project.yml"
+    prefix:   /projects
+
+request:
+    resource: "@ProjectBundle/Resources/config/routing/request.yml"
+    prefix:   /request

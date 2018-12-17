@@ -1,0 +1,15 @@
+project_index:
+    path:     /
+    defaults: { _controller: "ProjectBundle:Project:index" }
+project_new:
+    path:     /new
+    defaults: { _controller: "ProjectBundle:Project:new" }
+project_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ProjectBundle:Project:edit" }
+project_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ProjectBundle:Project:delete" }
+project_fiche:
+    path:     /{id}
+    defaults: { _controller: "ProjectBundle:Project:fiche" }

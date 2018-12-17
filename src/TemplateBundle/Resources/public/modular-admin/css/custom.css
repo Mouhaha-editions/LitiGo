@@ -1,0 +1,15 @@
+.response hr{
+    margin-top:7px;
+    margin-bottom: 7px;
+}
+.response {
+    font-size: 14px;
+    padding-left: 50px;
+}
+.comment {
+    font-size: 12px;
+    padding-left: 30px;
+}
+.small > .btn-sm{
+    font-size: 10px;
+}

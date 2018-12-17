@@ -11,6 +11,11 @@
     <link rel="stylesheet" href="{{ asset("bundles/template/modular-admin/css/vendor.css") }}">
     <!-- Theme initialization -->
     <link rel="stylesheet" id="theme-style" href="{{ asset("bundles/template/modular-admin/css/app-green.css") }}">
+    <link rel="stylesheet" href="{{ asset("vendor/sweetalert2/dist/sweetalert2.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("bundles/template/modular-admin/css/custom.css") }}">
+    <link rel="stylesheet" href="{{ asset("vendor/trumbowyg/dist/ui/trumbowyg.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("vendor/trumbowyg/dist/plugins/colors/ui/trumbowyg.colors.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("vendor/trumbowyg/dist/plugins/emoji/ui/trumbowyg.emoji.min.css") }}">
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
@@ -32,18 +37,18 @@
                 </form>
             </div>
             <div class="header-block header-block-buttons">
-                <a href="https://github.com/modularcode/modular-admin-html" class="btn btn-sm header-btn">
-                    <i class="fa fa-github-alt"></i>
-                    <span>View on GitHub</span>
-                </a>
-                <a href="https://github.com/modularcode/modular-admin-html/stargazers" class="btn btn-sm header-btn">
-                    <i class="fa fa-star"></i>
-                    <span>Star Us</span>
-                </a>
-                <a href="https://github.com/modularcode/modular-admin-html/releases" class="btn btn-sm header-btn">
-                    <i class="fa fa-cloud-download"></i>
-                    <span>Download .zip</span>
-                </a>
+                {#<a href="https://github.com/modularcode/modular-admin-html" class="btn btn-sm header-btn">#}
+                    {#<i class="fa fa-github-alt"></i>#}
+                    {#<span>View on GitHub</span>#}
+                {#</a>#}
+                {#<a href="https://github.com/modularcode/modular-admin-html/stargazers" class="btn btn-sm header-btn">#}
+                    {#<i class="fa fa-star"></i>#}
+                    {#<span>Star Us</span>#}
+                {#</a>#}
+                {#<a href="https://github.com/modularcode/modular-admin-html/releases" class="btn btn-sm header-btn">#}
+                    {#<i class="fa fa-cloud-download"></i>#}
+                    {#<span>Download .zip</span>#}
+                {#</a>#}
             </div>
             <div class="header-block header-block-nav">
                 <ul class="nav-profile">
@@ -130,6 +135,7 @@
                         <div class="logo">
                             <span class="l l1"></span>
                             <span class="l l2"></span>
+                            <span class="l l6"></span>
                             <span class="l l3"></span>
                             <span class="l l4"></span>
                             <span class="l l5"></span>
@@ -137,9 +143,13 @@
                 </div>
                 <nav class="menu">
                     <ul class="sidebar-menu metismenu" id="sidebar-menu">
-                        <li class="active">
+                        <li class="{% if app.request.get('_route') starts with 'dashboard_' %}active{% endif %}">
                             <a href="{{ url('dashboard_homepage') }}">
                                 <i class="fa fa-home"></i> Dashboard </a>
+                        </li>
+                        <li class="{% if app.request.get('_route') starts with 'project_' %}active{% endif %}">
+                            <a href="{{ url('project_index') }}">
+                                <i class="fa fa-home"></i> Projets </a>
                         </li>
 
                         <li class="{% if app.request.get('_route') starts with 'changelog' %}active{% endif %}">
@@ -163,96 +173,9 @@
             <footer class="sidebar-footer">
                 <ul class="sidebar-menu metismenu" id="customize-menu">
                     <li>
-                        <ul>
-                            <li class="customize">
-                                <div class="customize-item">
-                                    <div class="row customize-header">
-                                        <div class="col-4"> </div>
-                                        <div class="col-4">
-                                            <label class="title">fixed</label>
-                                        </div>
-                                        <div class="col-4">
-                                            <label class="title">static</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <label class="title">Sidebar:</label>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>
-                                                <input class="radio" type="radio" name="sidebarPosition" value="sidebar-fixed">
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>
-                                                <input class="radio" type="radio" name="sidebarPosition" value="">
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <label class="title">Header:</label>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>
-                                                <input class="radio" type="radio" name="headerPosition" value="header-fixed">
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>
-                                                <input class="radio" type="radio" name="headerPosition" value="">
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <label class="title">Footer:</label>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>
-                                                <input class="radio" type="radio" name="footerPosition" value="footer-fixed">
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                        <div class="col-4">
-                                            <label>
-                                                <input class="radio" type="radio" name="footerPosition" value="">
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="customize-item">
-                                    <ul class="customize-colors">
-                                        <li>
-                                            <span class="color-item color-red" data-theme="red"></span>
-                                        </li>
-                                        <li>
-                                            <span class="color-item color-orange" data-theme="orange"></span>
-                                        </li>
-                                        <li>
-                                            <span class="color-item color-green active" data-theme=""></span>
-                                        </li>
-                                        <li>
-                                            <span class="color-item color-seagreen" data-theme="seagreen"></span>
-                                        </li>
-                                        <li>
-                                            <span class="color-item color-blue" data-theme="blue"></span>
-                                        </li>
-                                        <li>
-                                            <span class="color-item color-purple" data-theme="purple"></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                        <a href="">
-                            <i class="fa fa-cog"></i> Customize </a>
+
+                        <a href="https://github.com/pkshetlie/LitiGo">
+                            <i class="fa fa-github"></i> {{ service_version.getProd() }} </a>
                     </li>
                 </ul>
             </footer>
@@ -260,8 +183,11 @@
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <div class="sidebar-mobile-menu-handle" id="sidebar-mobile-menu-handle"></div>
         <div class="mobile-menu-handle"></div>
+        {% block change_article %}
         <article class="content dashboard-page">
+            {% block body %}
             <section class="section">
+
                 <div class="row sameheight-container">
                     <div class="col col-12 col-sm-12 col-md-6 col-xl-5 stats-col">
                         <div class="card sameheight-item stats" data-exclude="xs">
@@ -380,6 +306,7 @@
                     </div>
                 </div>
             </section>
+
             <section class="section">
                 <div class="row sameheight-container">
                     <div class="col-xl-8">
@@ -1194,7 +1121,10 @@
                     </div>
                 </div>
             </section>
+            {% endblock %}
         </article>
+        {% endblock %}
+
         <footer class="footer">
             <div class="footer-block buttons">
             </div>
@@ -1215,6 +1145,56 @@
 
 <script src="{{ asset('bundles/template/modular-admin/js/vendor.js') }}"></script>
 <script src="{{ asset('bundles/template/modular-admin/js/app.js') }}"></script>
+<script src="{{ asset('vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('vendor/trumbowyg/dist/trumbowyg.min.js') }}"></script>
+<script src="{{ asset('vendor/trumbowyg/dist/plugins/cleanpaste/trumbowyg.cleanpaste.min.js') }}"></script>
+<script src="{{ asset('vendor/trumbowyg/dist/plugins/colors/trumbowyg.colors.min.js') }}"></script>
+<script src="{{ asset('vendor/trumbowyg/dist/plugins/emoji/trumbowyg.emoji.min.js') }}"></script>
+<script src="{{ asset('vendor/trumbowyg/dist/langs/fr.min.js') }}"></script>
+
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <script>
+            swal({
+                title: "",
+                html: "{{ message|trans|raw }}",
+                type: "{{ label == 'danger'? 'error':label }}"
+            });
+        </script>
+    {% endfor %}
+{% endfor %}
+<script>
+    $("[title]").tooltip();
+</script>
+
+<script>
+    $(function () {
+        $(document).on('click', '.confirm', function () {
+            return confirm('Etes vous certain(e) de vouloir continuer cette action ? ');
+        });
+        $("textarea.trumb").trumbowyg({
+            btns: [
+                ['viewHTML'],
+                // ['formatting'],
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                ['link'],
+                ['image'], // Our fresh created dropdown
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['foreColor', 'backColor'],
+                ['removeformat'],
+                ['fullscreen']
+            ],
+
+            autogrow: true,
+            lang: 'fr'
+        });
+    });
+
+</script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>

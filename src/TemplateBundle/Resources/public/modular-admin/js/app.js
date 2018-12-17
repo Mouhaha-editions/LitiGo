@@ -1332,14 +1332,6 @@ $(function () {
 	*************************************************/
 
 	function setThemeState() {
-		// set theme type
-		if (themeSettings.themeName) {
-			$styleLink.attr('href', 'css/app-' + themeSettings.themeName + '.css');
-		}
-		else {
-			$styleLink.attr('href', 'css/app.css');
-		}
-
 		// App classes
 		$app.removeClass('header-fixed footer-fixed sidebar-fixed');
 

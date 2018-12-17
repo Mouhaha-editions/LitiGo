@@ -34,3 +34,5 @@ Stack trace:
 [06-Dec-2018 23:16:15 Europe/Paris] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
 [06-Dec-2018 23:16:15 Europe/Paris] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
 [06-Dec-2018 23:16:15 Europe/Paris] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
+[10-Dec-2018 23:38:49 Europe/Paris] PHP Fatal error:  Cannot declare class BankBundle\Controller\ProjectController, because the name is already in use in F:\var\www\litigo\src\ProjectBundle\Controller\ProjectController.php on line 145
+[11-Dec-2018 21:13:03 Europe/Paris] PHP Fatal error:  Maximum execution time of 20 seconds exceeded in F:\var\www\litigo\vendor\doctrine\orm\lib\Doctrine\ORM\Mapping\ClassMetadataFactory.php on line 46

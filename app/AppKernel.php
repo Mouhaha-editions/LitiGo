@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new DashboardBundle\DashboardBundle(),
             new TemplateBundle\TemplateBundle(),
             new CoreBundle\CoreBundle(),
+            new ProjectBundle\ProjectBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

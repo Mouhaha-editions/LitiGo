@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {% embed 'embeded/panel.html.twig' %}
+                {% block block_title %}
+                    Ajouter/Modifier un projet
+                {% endblock %}
+                {% block block_body %}
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <input type="submit" class="btn" value="Enregistrer"/>
+                    {{ form_end(form) }}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+
+{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('vendor/EasyAutocomplete/dist/easy-autocomplete.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/EasyAutocomplete/dist/easy-autocomplete.themes.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('vendor/EasyAutocomplete/dist/jquery.easy-autocomplete.js') }}"></script>
+    <script>
+
+    </script>
+
+{% endblock %}

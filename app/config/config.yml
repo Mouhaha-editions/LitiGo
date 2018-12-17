@@ -7,6 +7,7 @@ imports:
     - { resource: "@PaginationBundle/Resources/config/services.yml" }
     - { resource: "@SettingsBundle/Resources/config/services.yml" }
     - { resource: "@CoreBundle/Resources/config/services.yml" }
+    - { resource: "@ProjectBundle/Resources/config/services.yml" }
 #    - { resource: "@GoogleBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
@@ -91,3 +92,9 @@ fos_user:
     from_email:
         address: "%from_email_address%"
         sender_name: "%from_email_sender_name%"
+
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            timestampable: true # not needed: listeners are not enabled by default

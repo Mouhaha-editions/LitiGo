@@ -1,0 +1,11 @@
+<div class="card card-{% block block_type %}default{% endblock %}">
+    <div class="card-header">
+        <div class="header-block">
+            <p class="title">{% block block_title %}{% endblock %}</p>
+        </div>
+    </div>
+    <div class="card-block">
+        {% block block_body %}{% endblock %}
+    </div>
+    <div class="card-footer">{% block block_footer %}{% endblock %}</div>
+</div>

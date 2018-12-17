@@ -1,0 +1,13 @@
+request_new:
+    path:     /{id}/new
+    defaults: { _controller: "ProjectBundle:Requete:new" }
+request_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ProjectBundle:Requete:edit" }
+
+request_new_comment:
+    path:     /new-comment
+    defaults: { _controller: "ProjectBundle:Requete:newComment" }
+request_index:
+    path:     /{id}
+    defaults: { _controller: "ProjectBundle:Requete:index" }

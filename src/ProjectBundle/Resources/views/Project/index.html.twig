@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row sameheight-container">
+        <div class="col-md-3">
+            {% embed 'embeded/card.html.twig' %}
+                {% block block_type %}success{% endblock %}
+                {% block block_title %}
+                    Nouveau projet
+                {% endblock %}
+                {% block block_body %}
+                    <p>Créez votre {% if projects|length == 0 %}premier{% else %}propre{% endif %} projet, partagez le avec vos clients et ... au travail !! </p>
+                {% endblock %}
+                {% block block_footer %}
+                    <div  class="text-center" >
+                        <a href="{{ url('project_new') }}">Créer un projet</a>
+
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+        {% for project in projects %}
+        <div class="col-md-3">
+            {% embed 'embeded/card.html.twig' %}
+                {% block block_type %}info{% endblock %}
+                {% block block_title %}
+                    <a href="{{ url('project_edit',{id:project.id}) }}" class="btn btn-default"><i class="fa fa-edit"></i></a>  {{ project.label }}
+                {% endblock %}
+                {% block block_body %}
+                   <p>{{ project.description }}</p>
+                    <small class="pull-right">fin prévue : <i>{{ project.endDate is null ? 'Jamais !': 'le '~project.endDate.format('d/m/Y') }}</i></small>
+                {% endblock %}
+                {% block block_footer %}
+                    <a href="{{ url('project_fiche',{id:project.id}) }}">Entrer</a>
+                {% endblock %}
+            {% endembed %}
+        </div>
+       {% endfor %}
+
+    </div>
+{% endblock %}

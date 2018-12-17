@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-12">
+            {% embed 'embeded/card.html.twig' %}
+                {% block block_type %}success{% endblock %}
+                {% block block_title %}
+                    {{ request.label }}
+                {% endblock %}
+                {% block block_body %}
+                    {% autoescape %}
+                    {{ request.description|raw }}<br/>
+                    {% endautoescape %}
+                    <small class="pull-right">par {{ request.initiator.fullname }}
+                        le {{ request.updatedAt.format('d/m/Y H:i') }}</small><br/>
+                    <hr/>
+                    <h5>Réponses</h5>
+                    {% for response in request.responses %}
+                        <div class="response">
+                            <b id="{{ response.id }}">{{ response.author.fullname }}
+                                <small>le {{ response.updatedAt.format('d/m/Y H:i') }}</small>
+                            </b><br/>
+                            {% autoescape %}
+                                {{ response.comment|raw }}<br/>
+                            {% endautoescape %}
+                            {% for comment in  response.comments %}
+                                <hr/>
+                                <div class="comment">
+                                    {% autoescape %}
+                                        {{ comment.comment|raw }}
+                                    {% endautoescape %} –
+                                    <b>{{ comment.author.fullname }}</b> {{ comment.updatedAt.format('d/m/Y H:i') }}
+                                    <br/>
+                                </div>
+                            {% endfor %}
+                            <div class="small text-right"><a href="#" data-response="{{ response.id }}"
+                                                             class="btn btn-sm btn-warning-outline small comment-response">commenter
+                                    cette réponse</a></div>
+
+                            <hr/>
+                        </div>
+                    {% endfor %}
+                {% endblock %}
+                {% block block_footer %}
+                    <div class="response">
+                        {{ form(form) }}
+                    </div>
+                {% endblock %}
+            {% endembed %}
+        </div>
+
+    </div>
+
+{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('vendor/EasyAutocomplete/dist/easy-autocomplete.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/EasyAutocomplete/dist/easy-autocomplete.themes.min.css') }}" rel="stylesheet">
+{% endblock %}
+{% block javascripts %}
+    <script src="{{ asset('vendor/EasyAutocomplete/dist/jquery.easy-autocomplete.js') }}"></script>
+    <script>
+        $('.comment-response').click(function () {
+            var response = $(this).data('response');
+            swal({
+                title: 'Commenter',
+                input: "textarea"
+
+            }).then((result) => {
+                if (result.value !== undefined && result.value.trim() != '') {
+                    $.ajax({
+                        url: '{{ url('request_new_comment') }}',
+                        data: {
+                            response: response,
+                            comment: result.value
+                        },
+                        dataType:'json',
+                        type:'post',
+                        success: function (data) {
+                            window.location.href = data.url;
+                            window.location.reload();
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+
+{% endblock %}

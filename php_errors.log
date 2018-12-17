@@ -72,3 +72,4 @@ Stack trace:
 #4 F:\var\www\dev_project\bin\console(27): Symfony\Co in F:\var\www\dev_project\app\AppKernel.php on line 20
 [19-Nov-2018 23:41:49 Europe/Paris] PHP Fatal error:  Access level to CustomerBundle\Entity\User::$id must be protected (as in class FOS\UserBundle\Model\User) or weaker in F:\var\www\dev_project\src\CoreBundle\Entity\User.php on line 17
 [09-Dec-2018 14:01:56 Europe/Paris] PHP Fatal error:  Scalar type declaration 'int' must be unqualified in F:\var\www\dev_project\src\BankBundle\Entity\Recurence.php on line 172
+[11-Dec-2018 00:54:52 Europe/Paris] PHP Fatal error:  Allowed memory size of 1610612736 bytes exhausted (tried to allocate 4096 bytes) in phar://C:/composer/composer.phar/src/Composer/DependencyResolver/RuleWatchGraph.php on line 52

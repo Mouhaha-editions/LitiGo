@@ -1,0 +1,4 @@
+services:
+#    project:
+#        class: ProjectBundle\Service\AccountService
+#        arguments: ["@doctrine.orm.entity_manager"]

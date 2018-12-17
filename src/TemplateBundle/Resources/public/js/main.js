@@ -6,7 +6,7 @@
  *
  */
 
-$(document).ready(function() {
+$(function() {
 	quickmenu($('.quickmenu__item.active'));
 
 	$('body').on('click', '.quickmenu__item', function() {

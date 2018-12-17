@@ -1,0 +1,25 @@
+project:
+  label:
+    label: Libellé
+    description: Description
+    startDate: Début
+    endDate: Fin ... prévue
+  placeholder:
+    label: Donnez lui un nom sympa tout le monde le voit
+    description: Pour les cas de perte de mémoire
+    startDate: pour les anniversaires
+    endDate: prévue .. ca veut tout dire ...
+response:
+  label:
+    comment: Répondre
+  placeholder:
+    comment: votre réponse
+request:
+  label:
+    label: Libellé
+    description: Description
+    type: Type de demande
+  placeholder:
+    label: Le sujet de discussion
+    description: Pour en dire plus sur le sujet
+    type: Type de demande

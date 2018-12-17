@@ -1,16 +1,14 @@
-<div class="card tasks sameheight-item {% block additionnal_class %}{% endblock %}" data-exclude="xs,sm" style="height: 490px;">
+<div class="card {% block  block_type %}{% endblock %}" >
     <div class="card-header bordered">
         <div class="header-block">
-            <h3 class="title"> {% block panel_title %}{% endblock %} </h3>
+            <h3 class="title"> {% block  block_title %}{% endblock %} </h3>
         </div>
         <div class="header-block pull-right">
-            {% block panel_button %}{% endblock %}
+            {% block  block_button %}{% endblock %}
         </div>
     </div>
     <div class="card-block">
-        <div class="tasks-block">
-            {% block panel_body %}{% endblock %}
-            {% block panel_footer %}{% endblock %}
-        </div>
+            {% block  block_body %}{% endblock %}
+            {% block block_footer %}{% endblock %}
     </div>
 </div>
